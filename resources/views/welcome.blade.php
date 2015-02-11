@@ -1,46 +1,92 @@
+<!doctype html>
 <html>
-	<head>
-		<link href='//fonts.googleapis.com/css?family=Lato:100' rel='stylesheet' type='text/css'>
 
-		<style>
-			body {
-				margin: 0;
-				padding: 0;
-				width: 100%;
-				height: 100%;
-				color: #B0BEC5;
-				display: table;
-				font-weight: 100;
-				font-family: 'Lato';
-			}
+<head>
 
-			.container {
-				text-align: center;
-				display: table-cell;
-				vertical-align: middle;
-			}
+  <title>unquote</title>
 
-			.content {
-				text-align: center;
-				display: inline-block;
-			}
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
 
-			.title {
-				font-size: 96px;
-				margin-bottom: 40px;
-			}
+  <script src="../components/platform/platform.js">
+  </script>
 
-			.quote {
-				font-size: 24px;
-			}
-		</style>
-	</head>
-	<body>
-		<div class="container">
-			<div class="content">
-				<div class="title">Laravel 5</div>
-				<div class="quote">{{ Inspiring::quote() }}</div>
-			</div>
-		</div>
-	</body>
+  <link rel="import" href="../components/font-roboto/roboto.html">
+  <link rel="import"
+    href="../components/core-header-panel/core-header-panel.html">
+  <link rel="import"
+    href="../components/core-toolbar/core-toolbar.html">
+  <link rel="import"
+    href="../components/paper-tabs/paper-tabs.html">
+  <link rel="import" href="post-list.html">
+
+  <style>
+  html,body {
+    height: 100%;
+    margin: 0;
+    background-color: #E5E5E5;
+    font-family: 'RobotoDraft', sans-serif;
+  }
+  core-header-panel {
+    height: 100%;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch; 
+  }
+  core-toolbar {
+    background: #03a9f4;
+    color: white;
+  }
+  #tabs {
+    width: 100%;
+    margin: 0;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+	text-transform: uppercase;
+  }
+  .container {
+    width: 80%;
+    margin: 50px auto;
+  }
+  @media (min-width: 481px) {
+    #tabs {
+      width: 200px;
+    }
+    .container {
+      width: 400px;
+    }
+  }
+  </style>
+
+</head>
+
+<body unresolved>
+
+  <core-header-panel>
+
+    <core-toolbar>
+
+      <paper-tabs id="tabs" selected="all" self-end>
+        <paper-tab name="all">All</paper-tab>
+        <paper-tab name="favorites">Favorites</paper-tab>
+      </paper-tabs>
+
+    </core-toolbar>
+
+    <div class="container" layout vertical center>
+      <post-list show="all"></post-list>
+    </div>
+
+  </core-header-panel>
+
+  <script>
+  var tabs = document.querySelector('paper-tabs');
+  var list = document.querySelector('post-list');
+
+  tabs.addEventListener('core-select', function() {
+    list.show = tabs.selected;
+  });
+  </script>
+</body>
+
 </html>
